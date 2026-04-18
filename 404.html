@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Сторінку не знайдено | СЦД</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBlueDark: '#001428',
+                        brandOrange: '#FF6433',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brandBlueDark text-white min-h-screen flex items-center justify-center p-6 font-sans overflow-hidden relative">
+    
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brandOrange/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"></div>
+
+    <div class="max-w-2xl text-center relative z-10">
+        <h1 class="text-[150px] md:text-[200px] font-black leading-none tracking-tighter text-white/10 select-none">404</h1>
+        
+        <div class="-mt-12 md:-mt-20">
+            <h2 class="text-3xl md:text-5xl font-black mb-6 uppercase">Здається, ви заблукали</h2>
+            <p class="text-blue-100/60 text-lg md:text-xl mb-10 max-w-md mx-auto">
+                Сторінка, яку ви шукаєте, не існує або була перенесена. Поверніться на головну, щоб продовжити діяти.
+            </p>
+            
+            <a href="https://scd.life" class="inline-flex items-center gap-3 bg-brandOrange hover:bg-orange-600 text-white px-8 py-4 rounded-2xl font-black text-lg transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_40px_-5px_rgba(255,100,51,0.4)]">
+                <i class="ph-bold ph-house"></i>
+                НА ГОЛОВНУ
+            </a>
+        </div>
+    </div>
+
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2 opacity-30">
+        <div class="w-6 h-6 bg-brandOrange rounded flex items-center justify-center text-[10px] font-black text-white">С</div>
+        <span class="font-black tracking-widest text-xs">СЦД</span>
+    </div>
+
+</body>
+</html>
