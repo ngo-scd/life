@@ -2,7 +2,7 @@
 
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 ![Version](https://img.shields.io/badge/Version-1.2.0-blue)
-![Tech](https://img.shields.io/badge/Stack-Tailwind_CSS | HTML5 | JS-orange)
+![Tech](https://img.shields.io/badge/Stack-Tailwind_CSS_%7C_HTML5_%7C_JS-orange)
 
 Сучасна веб-платформа громадської організації, створена для системної боротьби з корупцією, захисту прав громадян та розбудови прозорого суспільства в Україні.
 
