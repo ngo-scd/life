@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth scroll-pt-24">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ГО «Суспільний центр дії» | Захист, Прозорість, Дія</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brandBlue: '#0A2540', 
+                        brandBlueDark: '#001428',
+                        brandOrange: '#FF6433',
+                        brandOrangeHover: '#E54C19',
+                        brandGray: '#F7F9FC'
+                    },
+                    boxShadow: {
+                        'glow': '0 0 50px -12px rgba(255, 100, 51, 0.5)',
+                        'glow-hover': '0 0 40px -5px rgba(255, 100, 51, 0.4)',
+                        'premium': '0 40px 80px -15px rgba(0,0,0,0.1)',
+                        'inner-glass': 'inset 0 2px 4px 0 rgba(255,255,255,0.05)'
+                    },
+                    animation: {
+                        'marquee': 'marquee 35s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #001428; }
+        ::-webkit-scrollbar-thumb { background: #0A2540; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF6433; }
+        
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+            color: transparent;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .bg-grid-pattern-dark {
+            background-size: 60px 60px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        .text-gradient-orange {
+            background: linear-gradient(135deg, #FF6433 0%, #FFA800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .audit-line::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #FF6433, #0A2540, #0A2540);
+            opacity: 0.5;
+        }
+
+        .mask-edges {
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #FF6433, #3b82f6, #22c55e, #FF6433);
+            opacity: 0.3;
+            left: 28px; /* Mobile */
+        }
+        @media (min-width: 768px) {
+            .timeline-line::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    
+    /* КОМІТЕТИ МОДАЛКИ */  
+    /* Глибоке розмиття фону */
+    .modal-backdrop-blur {
+        backdrop-filter: blur(15px) brightness(0.7);
+        -webkit-backdrop-filter: blur(15px) brightness(0.7);
+    }
+    /* Анімація появи: збільшення + плавне підняття */
+    .modal-zoom-in {
+        animation: modalScaleUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes modalScaleUp {
+        from { opacity: 0; transform: scale(0.8) translateY(40px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    body.modal-active { overflow: hidden; }
+      
+    /*Команда*/
+    .team-scroll::-webkit-scrollbar { width: 4px; }
+    .team-scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+    .team-scroll::-webkit-scrollbar-thumb { background: #FF6433; border-radius: 10px; }
+      
+      /* Мобільне меню */
+/* Мобільне меню: покращена анімація */
+#mobile-menu {
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    clip-path: circle(0% at 50% 0%); /* Анімація розкриття колом */
+}
+
+#mobile-menu.active-menu {
+    clip-path: circle(150% at 50% 0%);
+    opacity: 1;
+}
+
+#mobile-menu.hidden-menu {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Ефект для пунктів меню */
+.menu-item-glass {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+}
+    </style>
+</head>
+<body class="bg-brandGray text-brandBlue overflow-x-hidden selection:bg-brandOrange selection:text-white">
+  
+<!--  ВХОД В ЛК  -->
+<div id="auth-widget" class="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[150] transition-all duration-500">
+    
+    <div id="expanded-panel" class="flex items-center justify-between min-w-[280px] md:min-w-[340px] p-1.5 md:p-2 pl-5 md:pl-7 rounded-2xl md:rounded-3xl bg-brandBlueDark/80 backdrop-blur-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all duration-500">
+        <div class="flex items-center gap-3">
+            <div class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brandOrange opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-brandOrange"></span>
+            </div>
+            <span class="text-white font-black text-[9px] md:text-[10px] uppercase tracking-[0.2em] whitespace-nowrap">Кабінет СЦД</span>
+        </div>
+        
+        <div class="flex items-center gap-1.5 md:gap-2">
+            <a href="login.html" class="bg-brandOrange hover:bg-brandOrangeHover text-white px-4 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl text-[9px] md:text-[11px] font-black uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-glow">
+                Увійти
+            </a>
+            <button onclick="toggleAuthWidget(true)" class="w-8 h-8 md:w-11 md:h-11 flex items-center justify-center text-white/30 hover:text-white transition-colors group">
+                <i class="ph ph-caret-right text-lg md:text-2xl group-hover:translate-x-1 transition-transform"></i>
+            </button>
+        </div>
+    </div>
+
+    <button id="collapsed-icon" onclick="toggleAuthWidget(false)" class="hidden w-12 h-12 md:w-16 md:h-16 bg-brandBlueDark/60 backdrop-blur-xl border border-brandOrange/40 rounded-full items-center justify-center text-brandOrange shadow-[0_10px_40px_rgba(0,0,0,0.3)] hover:border-brandOrange hover:scale-110 active:scale-90 transition-all animate-float relative">
+        <i class="ph-fill ph-user-circle text-2xl md:text-3xl"></i>
+        <span class="absolute top-0 right-0 w-3 h-3 bg-brandOrange rounded-full border-2 border-brandBlueDark transform translate-x-1/4 -translate-y-1/4 animate-pulse"></span>
+    </button>
+</div>
+
+<style>
+    /* Анімація для згорнутої іконки */
+    @keyframes float-widget {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-8px) rotate(3deg); }
+    }
+    .animate-float {
+        animation: float-widget 5s ease-in-out infinite;
+    }
+
+    /* Плавна поява модалки (зум) */
+    .widget-zoom {
+        animation: widgetZoom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes widgetZoom {
+        from { opacity: 0; transform: scale(0.5); }
+        to { opacity: 1; transform: scale(1); }
+    }
+</style>
+  
+<nav id="navbar" class="fixed w-full z-[110] transition-all duration-700 py-4 px-6">
+    <div class="max-w-[1400px] mx-auto flex justify-between items-center glass-panel p-4 rounded-3xl border-white/10 transition-all duration-500">
+        <a href="#" onclick="if(window.innerWidth < 768) { toggleMobileMenu(); return false; }" class="flex items-center gap-3 group outline-none relative z-[120]">
+            <div class="w-10 h-10 bg-brandOrange rounded-xl flex items-center justify-center text-white font-black shadow-glow group-hover:scale-105 transition-transform">С</div>
+            <div class="flex flex-col">
+                <span class="font-black text-2xl tracking-tighter text-white transition-colors leading-none" id="logo-text">СЦД</span>
+                <span id="menu-status-text" class="text-[8px] text-brandOrange font-bold uppercase tracking-widest md:hidden transition-all">МЕНЮ</span>
+            </div>
+        </a>
+
+        <div class="flex items-center gap-8">
+            <div class="hidden md:flex items-center gap-8" id="desktop-links">
+                <a href="#committees" class="text-white/60 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors outline-none">Напрямки</a>
+                <a href="#roadmap" class="text-white/60 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors outline-none">Візія</a>
+                <a href="#about" class="hidden lg:block text-white/60 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors outline-none">Про нас</a>
+                <a href="#governance" class="text-white/60 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors outline-none">Управління</a>
+                <a href="javascript:void(0)" onclick="openTeamModal()" class="text-white/80 hover:text-brandOrange text-xs font-bold uppercase tracking-widest transition-colors outline-none">Команда</a>
+            </div>
+            <a href="#donate" class="bg-brandOrange hover:bg-brandOrangeHover text-white px-6 md:px-8 py-3 rounded-2xl font-black text-sm shadow-glow hover:scale-105 active:scale-95 transition-all">
+                ПІДТРИМАТИ
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div id="mobile-menu" class="fixed inset-0 z-[105] hidden-menu bg-brandBlueDark/95 backdrop-blur-3xl flex flex-col p-6 md:hidden">
+    <div class="pt-32 flex flex-col gap-4">
+        <a href="#committees" onclick="toggleMobileMenu()" class="menu-item-glass p-6 rounded-2xl flex justify-between items-center">
+            <span class="text-white text-2xl font-black uppercase tracking-tighter">Напрямки</span>
+            <i class="ph ph-arrow-up-right text-brandOrange text-xl"></i>
+        </a>
+        <a href="#roadmap" onclick="toggleMobileMenu()" class="menu-item-glass p-6 rounded-2xl flex justify-between items-center">
+            <span class="text-white text-2xl font-black uppercase tracking-tighter">Візія</span>
+            <i class="ph ph-trend-up text-brandOrange text-xl"></i>
+        </a>
+        <a href="#about" onclick="toggleMobileMenu()" class="menu-item-glass p-6 rounded-2xl flex justify-between items-center">
+            <span class="text-white text-2xl font-black uppercase tracking-tighter">Про нас</span>
+            <i class="ph ph-info text-brandOrange text-xl"></i>
+        </a>
+        <a href="javascript:void(0)" onclick="toggleMobileMenu(); openTeamModal();" class="bg-brandOrange/10 border border-brandOrange/30 p-6 rounded-2xl flex justify-between items-center">
+            <span class="text-brandOrange text-2xl font-black uppercase tracking-tighter">Команда</span>
+            <i class="ph ph-users-three text-brandOrange text-xl"></i>
+        </a>
+    </div>
+    <div class="mt-auto pb-10 flex justify-center gap-8">
+        <a href="#" class="text-white/40 text-2xl"><i class="ph ph-instagram-logo"></i></a>
+        <a href="#" class="text-white/40 text-2xl"><i class="ph ph-telegram-logo"></i></a>
+    </div>
+</div>
+
+    <main>
+
+<section class="relative min-h-screen flex items-center bg-brandBlueDark overflow-hidden bg-grid-pattern-dark">
+    <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-brandOrange/10 rounded-full blur-[150px] animate-pulse"></div>
+    <div class="absolute -bottom-40 -left-40 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+    <div class="max-w-[1400px] mx-auto px-6 pt-32 pb-32 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-16 items-center">
+            
+            <div class="lg:col-span-7" data-aos="fade-right">
+                <h1 class="text-5xl sm:text-7xl md:text-[85px] font-black text-white leading-[0.9] tracking-tighter mb-10 uppercase">
+                    Діємо сьогодні, <br> 
+                    <span class="text-outline text-white/20 italic">щоб у суспільства</span> <br> 
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-brandOrange to-yellow-500">було завтра.</span>
+                </h1>
+                
+                <p class="text-blue-100/60 text-xl md:text-2xl font-medium mb-12 max-w-xl leading-relaxed">
+                    Ми — «Суспільний центр дії». Перетворюємо цивільний спротив на системні рішення. Захищаємо права, боремося з корупцією та будуємо фундамент держави.
+                </p>
+                
+                <div class="hidden md:flex flex-wrap gap-8 items-center">
+    <a href="#donate" class="bg-brandOrange hover:bg-brandOrangeHover text-white px-12 py-6 rounded-2xl font-black text-xl shadow-glow hover:-translate-y-1 transition-all flex items-center gap-4 group">
+        Підтримати дією <i class="ph-bold ph-rocket-launch group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+    </a>
+</div>
+            </div>
+
+            <div class="lg:col-span-5 mt-16 lg:mt-0" data-aos="fade-up">
+                <div class="relative group">
+                    <div class="absolute -inset-4 border border-white/5 rounded-[4.5rem] pointer-events-none group-hover:border-brandOrange/20 transition-colors duration-500"></div>
+                    
+                    <div class="glass-panel p-6 md:p-12 rounded-[3.5rem] md:rounded-[4rem] border border-white/10 bg-white/5 backdrop-blur-2xl shadow-2xl relative overflow-hidden">
+                        <div class="relative z-10 space-y-6 md:y-8">
+                            
+                            <div onclick="openHelpModal()" class="cursor-pointer group/card relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-brandOrange to-orange-600 p-6 md:p-8 shadow-glow hover:scale-[1.03] transition-all duration-500">
+                                <div class="absolute top-0 right-0 p-4 opacity-20 group-hover/card:scale-110 transition-transform">
+                                    <i class="ph-fill ph-shield-plus text-[80px] md:text-[120px] text-white"></i>
+                                </div>
+                                <div class="relative z-10">
+                                    <h4 class="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-2 md:mb-4 text-white">Звернутись</h4>
+                                    <p class="text-white/90 text-sm font-bold leading-snug max-w-[180px] md:max-w-[200px]">Отримайте фахову допомогу захист прав, психологічну, гуманітарну або матеріальну підтримку</p>
+                                </div>
+                                <div class="mt-6 flex items-center gap-2 text-white font-black text-[10px] md:text-xs uppercase bg-black/20 w-fit px-4 py-2 rounded-full backdrop-blur-md">
+                                    Діяти негайно <i class="ph-bold ph-caret-right"></i>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 md:gap-6">
+    <div onclick="openJoinModal()" class="cursor-pointer group/item p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-white/10 bg-white/5 hover:bg-brandOrange transition-all duration-500">
+        <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white/10 flex items-center justify-center mb-4 md:mb-6 group-hover/item:bg-white transition-all">
+            <i class="ph-duotone ph-users-three text-xl md:text-2xl text-brandOrange"></i>
+        </div>
+        <h5 class="text-white font-black text-base md:text-lg uppercase tracking-tight mb-1 md:mb-2 group-hover/item:text-brandBlueDark transition-colors">Долучитись</h5>
+        <p class="text-white/40 text-[9px] md:text-[10px] font-bold uppercase leading-tight group-hover/item:text-brandBlueDark/70 transition-colors">
+            Стати частиною професійної команди для системної розбудови громадянського суспільства
+        </p>
+    </div>
+
+    <a href="education.html" class="cursor-pointer group/item p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border border-white/10 bg-white/5 hover:bg-white transition-all duration-500 block">
+        <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-brandOrange/20 flex items-center justify-center mb-4 md:mb-6 group-hover/item:bg-brandBlueDark transition-all">
+            <i class="ph-duotone ph-graduation-cap text-xl md:text-2xl text-brandOrange group-hover/item:text-white transition-colors"></i>
+        </div>
+        <h5 class="text-white font-black text-base md:text-lg uppercase tracking-tight mb-1 md:mb-2 group-hover/item:text-brandBlueDark transition-colors">Навчання</h5>
+        <p class="text-white/40 text-[9px] md:text-[10px] font-bold uppercase leading-tight group-hover/item:text-brandBlueDark/70 transition-colors">
+            Експертні тренінги та база знань від провідних фахівців у відкритому доступі
+        </p>
+    </a>
+</div>
+
+                            <a href="#donate" class="md:hidden flex items-center justify-between w-full p-6 rounded-[2rem] bg-white/5 border border-brandOrange/30 hover:bg-brandOrange transition-all group/donate">
+                                <div class="flex items-center gap-4">
+                                    <i class="ph-fill ph-rocket-launch text-2xl text-brandOrange group-hover/donate:text-white transition-colors"></i>
+                                    <span class="text-white font-black uppercase tracking-widest text-sm">Підтримати дією</span>
+                                  <p class="text-white/40 text-[9px] md:text-[10px] font-bold uppercase leading-tight group-hover/item:text-brandBlueDark/70 transition-colors">Долучайся будьяким чином, особисто беручи участь у розвитку організації за для досягнення її цілей, або підтримай фінансово в 1 клік</p>
+                                </div>
+                                <i class="ph ph-caret-right text-white/20 group-hover/donate:text-white"></i>
+                            </a>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brandOrange/40 to-transparent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+      
+<!-- Безкінечна стрічка -->
+        <div class="bg-brandOrange py-6 relative z-20 border-y border-white/10 group overflow-hidden">
+            <div class="max-w-[100vw] mask-edges">
+                <div class="flex w-max animate-marquee group-hover:[animation-play-state:paused] cursor-default">
+                    <div class="flex shrink-0 gap-16 px-8">
+                        <span class="text-white font-black text-2xl uppercase italic tracking-tighter flex items-center gap-4 hover:text-brandBlueDark transition-colors">
+                            <i class="ph-fill ph-lightning"></i> Медичний захист — Активно
+                        </span>
+                        <span class="text-white font-black text-2xl uppercase italic tracking-tighter flex items-center gap-4 hover:text-brandBlueDark transition-colors">
+                            <i class="ph-fill ph-lightning"></i> Антикорупційні місії — 24/7
+                        </span>
+                        <span class="text-white font-black text-2xl uppercase italic tracking-tighter flex items-center gap-4 hover:text-brandBlueDark transition-colors">
+                            <i class="ph-fill ph-lightning"></i> Підтримка ВПО — В процесі
+                        </span>
+                        <span class="text-white font-black text-2xl uppercase italic tracking-tighter flex items-center gap-4 hover:text-brandBlueDark transition-colors">
+                            <i class="ph-fill ph-lightning"></i> Гуманітарна логістика — Активно
+                        </span>
+                    </div>
+                    <div class="flex shrink-0 gap-16 px-8" aria-hidden="true">
+                        <span class="text-white font-black text-2xl uppercase italic tracking-tighter flex items-center gap-4 hover:text-brandBlueDark transition-colors">
+                            <i class="ph-fill ph-lightning"></i> Медичний захист — Активно
+                        </span>
+                        <span class="text-white font-black text-2xl uppercase italic tracking-tighter flex items-center gap-4 hover:text-brandBlueDark transition-colors">
+                            <i class="ph-fill ph-lightning"></i> Антикорупційні місії — 24/7
+                        </span>
+                        <span class="text-white font-black text-2xl uppercase italic tracking-tighter flex items-center gap-4 hover:text-brandBlueDark transition-colors">
+                            <i class="ph-fill ph-lightning"></i> Підтримка ВПО — В процесі
+                        </span>
+                        <span class="text-white font-black text-2xl uppercase italic tracking-tighter flex items-center gap-4 hover:text-brandBlueDark transition-colors">
+                            <i class="ph-fill ph-lightning"></i> Гуманітарна логістика — Активно
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+      
+<section id="committees" class="py-32 bg-brandGray overflow-hidden border-t border-gray-200">
+    <div class="max-w-[1400px] mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16" data-aos="fade-right">
+            <div class="max-w-3xl">
+                <span class="text-brandOrange font-bold tracking-widest uppercase text-sm mb-4 block">Комітети та підрозділи</span>
+                <h2 class="text-4xl md:text-6xl font-black text-brandBlue mb-6 tracking-tight">Напрямки нашої діяльності</h2>
+                <p class="text-gray-500 text-lg md:text-xl font-medium">ГО «СЦД» реалізує проєкти через 9 вузькопрофільних комітетів для максимальної експертності та ефективності в кожній сфері.</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div onclick="openCommitteeModal('medical')" class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-transparent hover:border-brandOrange/30 group hover:bg-brandBlueDark hover:shadow-glow-hover hover:-translate-y-2 transition-all duration-500 cursor-pointer" data-aos="fade-up">
+                <div class="w-16 h-16 bg-brandGray rounded-2xl mb-8 flex items-center justify-center group-hover:bg-brandOrange transition-all group-hover:scale-110">
+                    <i class="ph-duotone ph-first-aid text-3xl text-brandBlue group-hover:text-white transition-colors"></i>
+                </div>
+                <h4 class="text-xl font-black mb-4 text-brandBlueDark group-hover:text-white transition-colors">Охорона здоров’я</h4>
+                <p class="text-gray-500 text-sm font-medium group-hover:text-white/60 transition-colors">Медична допомога вразливим групам та розвиток системи охорони здоров'я.</p>
+            </div>
+
+            <div onclick="openCommitteeModal('anticor')" class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-transparent hover:border-brandOrange/30 group hover:bg-brandBlueDark hover:shadow-glow-hover hover:-translate-y-2 transition-all duration-500 cursor-pointer" data-aos="fade-up" data-aos-delay="50">
+                <div class="w-16 h-16 bg-brandGray rounded-2xl mb-8 flex items-center justify-center group-hover:bg-brandOrange transition-all group-hover:scale-110">
+                    <i class="ph-duotone ph-magnifying-glass text-3xl text-brandBlue group-hover:text-white transition-colors"></i>
+                </div>
+                <h4 class="text-xl font-black mb-4 text-brandBlueDark group-hover:text-white transition-colors">Протидія корупції</h4>
+                <p class="text-gray-500 text-sm font-medium group-hover:text-white/60 transition-colors">Громадський контроль, аналітика ризиків та антикорупційні розслідування.</p>
+            </div>
+
+            <div onclick="openCommitteeModal('education')" class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-transparent hover:border-brandOrange/30 group hover:bg-brandBlueDark hover:shadow-glow-hover hover:-translate-y-2 transition-all duration-500 cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 bg-brandGray rounded-2xl mb-8 flex items-center justify-center group-hover:bg-brandOrange transition-all group-hover:scale-110">
+                    <i class="ph-duotone ph-student text-3xl text-brandBlue group-hover:text-white transition-colors"></i>
+                </div>
+                <h4 class="text-xl font-black mb-4 text-brandBlueDark group-hover:text-white transition-colors">Освіта та молодь</h4>
+                <p class="text-gray-500 text-sm font-medium group-hover:text-white/60 transition-colors">Розробка тренінгів, розвиток громадянської освіти та правової культури.</p>
+            </div>
+
+            <div onclick="openCommitteeModal('social')" class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-transparent hover:border-brandOrange/30 group hover:bg-brandBlueDark hover:shadow-glow-hover hover:-translate-y-2 transition-all duration-500 cursor-pointer" data-aos="fade-up">
+                <div class="w-16 h-16 bg-brandGray rounded-2xl mb-8 flex items-center justify-center group-hover:bg-brandOrange transition-all group-hover:scale-110">
+                    <i class="ph-duotone ph-users-four text-3xl text-brandBlue group-hover:text-white transition-colors"></i>
+                </div>
+                <h4 class="text-xl font-black mb-4 text-brandBlueDark group-hover:text-white transition-colors">Соціальний захист</h4>
+                <p class="text-gray-500 text-sm font-medium group-hover:text-white/60 transition-colors">Системна підтримка ВПО, осіб з інвалідністю та незахищених громадян.</p>
+            </div>
+
+            <div onclick="openCommitteeModal('legal')" class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-transparent hover:border-brandOrange/30 group hover:bg-brandBlueDark hover:shadow-glow-hover hover:-translate-y-2 transition-all duration-500 cursor-pointer" data-aos="fade-up" data-aos-delay="50">
+                <div class="w-16 h-16 bg-brandGray rounded-2xl mb-8 flex items-center justify-center group-hover:bg-brandOrange transition-all group-hover:scale-110">
+                    <i class="ph-duotone ph-gavel text-3xl text-brandBlue group-hover:text-white transition-colors"></i>
+                </div>
+                <h4 class="text-xl font-black mb-4 text-brandBlueDark group-hover:text-white transition-colors">Правовий захист</h4>
+                <p class="text-gray-500 text-sm font-medium group-hover:text-white/60 transition-colors">Юридична допомога, представництво інтересів та моніторингові ініціативи.</p>
+            </div>
+
+            <div onclick="openCommitteeModal('international')" class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-transparent hover:border-brandOrange/30 group hover:bg-brandBlueDark hover:shadow-glow-hover hover:-translate-y-2 transition-all duration-500 cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 bg-brandGray rounded-2xl mb-8 flex items-center justify-center group-hover:bg-brandOrange transition-all group-hover:scale-110">
+                    <i class="ph-duotone ph-globe-hemisphere-west text-3xl text-brandBlue group-hover:text-white transition-colors"></i>
+                </div>
+                <h4 class="text-xl font-black mb-4 text-brandBlueDark group-hover:text-white transition-colors">Міжнародна співпраця</h4>
+                <p class="text-gray-500 text-sm font-medium group-hover:text-white/60 transition-colors">Співпраця з іноземними фондами, гранти та протидія дезінформації.</p>
+            </div>
+
+            <div onclick="openCommitteeModal('children')" class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-transparent hover:border-brandOrange/30 group hover:bg-brandBlueDark hover:shadow-glow-hover hover:-translate-y-2 transition-all duration-500 cursor-pointer" data-aos="fade-up">
+                <div class="w-16 h-16 bg-brandGray rounded-2xl mb-8 flex items-center justify-center group-hover:bg-brandOrange transition-all group-hover:scale-110">
+                    <i class="ph-duotone ph-baby text-3xl text-brandBlue group-hover:text-white transition-colors"></i>
+                </div>
+                <h4 class="text-xl font-black mb-4 text-brandBlueDark group-hover:text-white transition-colors">Допомога дітям</h4>
+                <p class="text-gray-500 text-sm font-medium group-hover:text-white/60 transition-colors">Підтримка дітей-сиріт та дітей, що потребують термінового лікування.</p>
+            </div>
+
+            <div onclick="openCommitteeModal('veterans')" class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-transparent hover:border-brandOrange/30 group hover:bg-brandBlueDark hover:shadow-glow-hover hover:-translate-y-2 transition-all duration-500 cursor-pointer" data-aos="fade-up" data-aos-delay="50">
+                <div class="w-16 h-16 bg-brandGray rounded-2xl mb-8 flex items-center justify-center group-hover:bg-brandOrange transition-all group-hover:scale-110">
+                    <i class="ph-duotone ph-medal text-3xl text-brandBlue group-hover:text-white transition-colors"></i>
+                </div>
+                <h4 class="text-xl font-black mb-4 text-brandBlueDark group-hover:text-white transition-colors">Підтримка ветеранів</h4>
+                <p class="text-gray-500 text-sm font-medium group-hover:text-white/60 transition-colors">Реабілітація, правовий та соціальний захист осіб, які постраждали від війни.</p>
+            </div>
+
+            <div onclick="openCommitteeModal('humanitarian')" class="bg-gradient-to-br from-brandOrange to-brandOrangeHover p-8 md:p-10 rounded-[2.5rem] shadow-glow group hover:-translate-y-2 transition-all duration-500 cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 bg-white/20 rounded-2xl mb-8 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <i class="ph-duotone ph-package text-3xl text-white"></i>
+                </div>
+                <h4 class="text-xl font-black mb-4 text-white">Гуманітарна допомога</h4>
+                <p class="text-white/80 text-sm font-medium">Логістика, збір та розподіл гуманітарних вантажів у найгарячіших точках.</p>
+            </div>
+        </div>
+    </div>
+</section>
+      
+      
+        <section id="roadmap" class="py-32 md:py-40 bg-brandBlueDark relative overflow-hidden">
+            <div class="absolute inset-0 bg-grid-pattern-dark opacity-30 pointer-events-none"></div>
+            <div class="absolute top-1/4 right-0 w-96 h-96 bg-brandOrange/10 rounded-full blur-[120px] pointer-events-none"></div>
+            
+            <div class="max-w-[1400px] mx-auto px-6 relative z-10 timeline-line">
+                <div class="text-center mb-24 md:mb-32 relative z-20" data-aos="fade-up">
+                    <span class="text-brandOrange font-black text-xs uppercase tracking-[0.3em] mb-4 block">Стратегія розвитку</span>
+                    <h2 class="text-5xl md:text-7xl font-black text-white tracking-tighter mb-6">
+                        НАША ВІЗІЯ <span class="text-gradient-orange">2026–2030.</span>
+                    </h2>
+                    <p class="text-blue-100/60 text-lg md:text-xl max-w-3xl mx-auto font-medium">
+                        Ми не просто реагуємо на кризи — ми будуємо систему. Ось наш покроковий план створення найвпливовішої громадської організації країни.
+                    </p>
+                </div>
+
+                <div class="space-y-16 md:space-y-24">
+                    <div class="relative flex flex-col md:flex-row items-center justify-between group" data-aos="fade-up">
+                        <div class="md:w-5/12 w-full text-left md:text-right pr-0 md:pr-12 pl-20 md:pl-0 order-2 md:order-1 mt-6 md:mt-0">
+                            <h3 class="text-3xl md:text-4xl font-black text-white mb-6">Фундамент та Запуск</h3>
+                            <ul class="space-y-4 text-blue-100/70 text-sm md:text-base inline-block text-left">
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-brandOrange mt-1 shrink-0"></i> <span><strong class="text-white">Легалізація:</strong> Офіційна реєстрація та закріплення статусу неприбутковості згідно з ПК.</span></li>
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-brandOrange mt-1 shrink-0"></i> <span><strong class="text-white">Запуск бази:</strong> Відкриття центрального Хабу в Києві та формування автопарку.</span></li>
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-brandOrange mt-1 shrink-0"></i> <span><strong class="text-white">Перші напрямки:</strong> Запуск 4-х найбільш критичних комітетів.</span></li>
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-brandOrange mt-1 shrink-0"></i> <span><strong class="text-white">Прозорість:</strong> Формування Наглядової ради та антикорупційної програми.</span></li>
+                            </ul>
+                        </div>
+                        <div class="absolute left-7 md:left-1/2 w-5 h-5 bg-brandOrange rounded-full transform -translate-x-1/2 shadow-[0_0_20px_#FF6433] z-10 border-4 border-brandBlueDark group-hover:scale-150 transition-transform order-1 md:order-2"></div>
+                        <div class="md:w-5/12 w-full pl-20 md:pl-12 order-3 md:order-3">
+                            <div class="text-brandOrange font-black text-6xl md:text-8xl opacity-30 group-hover:opacity-100 transition-opacity tracking-tighter">Рік 1</div>
+                        </div>
+                    </div>
+
+                    <div class="relative flex flex-col md:flex-row items-center justify-between group" data-aos="fade-up">
+                        <div class="md:w-5/12 w-full text-left md:text-right pr-0 md:pr-12 pl-20 md:pl-0 order-1 md:order-1 hidden md:block">
+                            <div class="text-blue-400 font-black text-6xl md:text-8xl opacity-30 group-hover:opacity-100 transition-opacity tracking-tighter">Рік 2</div>
+                        </div>
+                        <div class="absolute left-7 md:left-1/2 w-5 h-5 bg-blue-400 rounded-full transform -translate-x-1/2 shadow-[0_0_20px_#60a5fa] z-10 border-4 border-brandBlueDark group-hover:scale-150 transition-transform order-2 md:order-2"></div>
+                        <div class="md:w-5/12 w-full pl-20 md:pl-12 order-3 md:order-3">
+                            <div class="text-blue-400 font-black text-6xl opacity-30 group-hover:opacity-100 transition-opacity tracking-tighter block md:hidden mb-6">Рік 2</div>
+                            <h3 class="text-3xl md:text-4xl font-black text-white mb-6">Масштабування та Гранти</h3>
+                            <ul class="space-y-4 text-blue-100/70 text-sm md:text-base text-left">
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-blue-400 mt-1 shrink-0"></i> <span><strong class="text-white">Повна структура:</strong> Розгортання всіх 10 профільних комітетів.</span></li>
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-blue-400 mt-1 shrink-0"></i> <span><strong class="text-white">Міжнародний фандрейзинг:</strong> Інтеграція крипто-активів та платформ.</span></li>
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-blue-400 mt-1 shrink-0"></i> <span><strong class="text-white">Довіра донорів:</strong> Залучення перших системних міжнародних грантів.</span></li>
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-blue-400 mt-1 shrink-0"></i> <span><strong class="text-white">Експансія:</strong> Розбудова мережі регіональних представництв по Україні.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="relative flex flex-col md:flex-row items-center justify-between group" data-aos="fade-up">
+                        <div class="md:w-5/12 w-full text-left md:text-right pr-0 md:pr-12 pl-20 md:pl-0 order-2 md:order-1 mt-6 md:mt-0">
+                            <h3 class="text-3xl md:text-4xl font-black text-white mb-6">Вплив та Законотворчість</h3>
+                            <ul class="space-y-4 text-blue-100/70 text-sm md:text-base inline-block text-left">
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-white mt-1 shrink-0"></i> <span><strong class="text-white">Формування політик:</strong> Офіційне входження експертів ГО до дорадчих рад.</span></li>
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-white mt-1 shrink-0"></i> <span><strong class="text-white">Гучні розслідування:</strong> Системний контроль влади та передача справ правоохоронцям.</span></li>
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-white mt-1 shrink-0"></i> <span><strong class="text-white">Освіта лідерів:</strong> Масштабування освітніх програм для підготовки нового покоління.</span></li>
+                            </ul>
+                        </div>
+                        <div class="absolute left-7 md:left-1/2 w-5 h-5 bg-white rounded-full transform -translate-x-1/2 shadow-[0_0_20px_rgba(255,255,255,0.5)] z-10 border-4 border-brandBlueDark group-hover:scale-150 transition-transform order-1 md:order-2"></div>
+                        <div class="md:w-5/12 w-full pl-20 md:pl-12 order-3 md:order-3">
+                            <div class="text-white font-black text-6xl md:text-8xl opacity-30 group-hover:opacity-100 transition-opacity tracking-tighter">Рік 3</div>
+                        </div>
+                    </div>
+
+                    <div class="relative flex flex-col md:flex-row items-center justify-between group" data-aos="fade-up">
+                        <div class="md:w-5/12 w-full text-left md:text-right pr-0 md:pr-12 pl-20 md:pl-0 order-1 md:order-1 hidden md:block">
+                            <div class="text-green-400 font-black text-6xl md:text-8xl opacity-30 group-hover:opacity-100 transition-opacity tracking-tighter">Рік 4</div>
+                        </div>
+                        <div class="absolute left-7 md:left-1/2 w-5 h-5 bg-green-400 rounded-full transform -translate-x-1/2 shadow-[0_0_20px_#4ade80] z-10 border-4 border-brandBlueDark group-hover:scale-150 transition-transform order-2 md:order-2"></div>
+                        <div class="md:w-5/12 w-full pl-20 md:pl-12 order-3 md:order-3">
+                            <div class="text-green-400 font-black text-6xl opacity-30 group-hover:opacity-100 transition-opacity tracking-tighter block md:hidden mb-6">Рік 4</div>
+                            <h3 class="text-3xl md:text-4xl font-black text-white mb-6">Міжнародне партнерство</h3>
+                            <ul class="space-y-4 text-blue-100/70 text-sm md:text-base text-left">
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-green-400 mt-1 shrink-0"></i> <span><strong class="text-white">Глобальна взаємодія:</strong> Пряма співпраця з іноземними фондами.</span></li>
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-green-400 mt-1 shrink-0"></i> <span><strong class="text-white">Координація:</strong> Статус офіційного оператора великих гуманітарних місій.</span></li>
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-green-400 mt-1 shrink-0"></i> <span><strong class="text-white">Діяльність за кордоном:</strong> Представництво інтересів громадян за межами України.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="relative flex flex-col md:flex-row items-center justify-between group" data-aos="fade-up">
+                        <div class="md:w-5/12 w-full text-left md:text-right pr-0 md:pr-12 pl-20 md:pl-0 order-2 md:order-1 mt-6 md:mt-0">
+                            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-brandOrange/20 border border-brandOrange/30 text-brandOrange rounded-full text-xs font-black uppercase tracking-[0.2em] mb-6">Фінальна мета</div>
+                            <h3 class="text-3xl md:text-4xl font-black text-white mb-6">Інституційна сталість</h3>
+                            <ul class="space-y-4 text-blue-100/70 text-sm md:text-base inline-block text-left">
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-brandOrange mt-1 shrink-0"></i> <span><strong class="text-white">Перехід у статус донора:</strong> Запуск власних грантових та стипендіальних програм ГО «СЦД».</span></li>
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-brandOrange mt-1 shrink-0"></i> <span><strong class="text-white">Повна автономія:</strong> Досягнення незалежності через ендавменти та сталі джерела фінансування.</span></li>
+                                <li class="flex items-start gap-3"><i class="ph-bold ph-check text-brandOrange mt-1 shrink-0"></i> <span><strong class="text-white">Лідерство:</strong> Статус найвпливовішої ГО, що формує порядок денний громадянського суспільства.</span></li>
+                            </ul>
+                        </div>
+                        <div class="absolute left-7 md:left-1/2 w-6 h-6 bg-brandOrange rounded-full transform -translate-x-1/2 shadow-[0_0_30px_#FF6433] z-10 border-4 border-brandBlueDark group-hover:scale-150 transition-transform order-1 md:order-2"></div>
+                        <div class="md:w-5/12 w-full pl-20 md:pl-12 order-3 md:order-3">
+                            <div class="text-brandOrange font-black text-6xl md:text-8xl opacity-100 tracking-tighter drop-shadow-[0_0_15px_rgba(255,100,51,0.5)]">Рік 5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+              <section id="about" class="py-32 md:py-40 bg-white">
+            <div class="max-w-[1400px] mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                    <div data-aos="fade-up">
+                        <span class="text-brandOrange font-black text-xs uppercase tracking-[0.3em] mb-6 block">Основні цінності</span>
+                        <h2 class="text-5xl md:text-7xl font-black text-brandBlueDark tracking-tighter leading-[0.95] mb-10">
+                            НЕ ГОВОРИМО ПРО <br>
+                            <span class="line-through decoration-brandOrange decoration-[6px] md:decoration-[10px] text-gray-400 opacity-80 inline-block -rotate-2 pr-4">ПРОБЛЕМИ.</span> <br> 
+                            <span class="bg-brandBlueDark text-white px-4 leading-tight inline-block my-2 shadow-lg">МИ ЇХ</span> <br> 
+                            ВИРІШУЄМО.
+                        </h2>
+                    </div>
+                    <div class="bg-brandGray p-10 md:p-14 rounded-[3rem] md:rounded-[4rem] border-l-8 border-brandOrange shadow-sm hover:shadow-premium transition-shadow duration-500" data-aos="fade-left">
+                        <p class="text-xl md:text-2xl font-medium text-gray-600 leading-relaxed italic">
+                            «Ми створили цю організацію, бо розуміли: час розмитої відповідальності минув. Ми об'єднуємо <span class="text-brandBlueDark font-black">дієві рішення</span>, експертність та прозорість для захисту тих, хто цього потребує найбільше.»
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section id="governance" class="py-32 md:py-40 bg-brandBlueDark relative overflow-hidden">
+            <div class="absolute inset-0 bg-grid-pattern-dark opacity-30 pointer-events-none"></div>
+            <div class="absolute top-1/4 -left-64 w-96 h-96 bg-brandOrange/20 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none"></div>
+            
+            <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+                <div class="mb-16 md:mb-24 text-center md:text-left" data-aos="fade-up">
+                    <span class="text-brandOrange font-black text-xs uppercase tracking-[0.3em] mb-4 block">Інституційна архітектура</span>
+                    <h2 class="text-5xl md:text-8xl font-black text-white tracking-tighter mb-6">
+                        МОДЕЛЬ <br class="hidden md:block"> <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandOrange to-orange-400">УПРАВЛІННЯ.</span>
+                    </h2>
+                    <p class="text-blue-100/60 text-lg md:text-xl max-w-2xl font-medium mx-auto md:mx-0">
+                        Ми працюємо без бюрократичних лабіринтів. Жодної узурпації влади — лише прозорі механізми контролю та ефективна екзекуція.
+                    </p>
+                </div>
+
+                <div class="flex flex-col gap-6">
+                    <div class="bg-white/5 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-white/10 hover:border-brandOrange/50 transition-all duration-500 group relative overflow-hidden" data-aos="fade-up">
+                        <div class="absolute -right-20 -top-20 w-64 h-64 bg-brandOrange/10 rounded-full blur-[50px] group-hover:bg-brandOrange/20 transition-colors duration-700 pointer-events-none"></div>
+                        <div class="relative z-10">
+                            <div class="flex flex-col md:flex-row gap-8 items-start md:items-center justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <div class="w-12 h-12 bg-brandOrange rounded-2xl flex items-center justify-center text-white shadow-glow group-hover:scale-110 transition-transform">
+                                            <i class="ph-fill ph-users-three text-2xl"></i>
+                                        </div>
+                                        <span class="text-brandOrange font-bold text-xs uppercase tracking-widest">Вищий орган</span>
+                                    </div>
+                                    <h3 class="text-3xl md:text-4xl font-black text-white mb-4">Загальні збори</h3>
+                                    <p class="text-blue-100/70 text-base md:text-lg max-w-3xl leading-relaxed">
+                                        Наш «парламент». Орган, де повноправні члени затверджують стратегічні питання та визначають глобальний вектор руху Організації.
+                                    </p>
+                                </div>
+                                <div class="shrink-0 w-full md:w-auto hidden md:block">
+                                    <div class="glass-panel p-5 rounded-2xl border-white/10 flex items-center gap-4 group-hover:bg-white/5 transition-colors">
+                                        <div class="relative flex items-center justify-center w-3 h-3">
+                                            <span class="absolute inline-flex h-full w-full rounded-full bg-brandOrange opacity-75 animate-ping"></span>
+                                            <span class="relative inline-flex rounded-full h-2 w-2 bg-brandOrange"></span>
+                                        </div>
+                                        <span class="text-white font-bold text-sm uppercase tracking-widest">Strategic Vector</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <a href="#" class="flex justify-center items-center gap-3 px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-brandOrange hover:border-brandOrange transition-all outline-none focus-visible:ring-2 focus-visible:ring-brandOrange group/btn">
+                                    <i class="ph-bold ph-file-text text-brandOrange group-hover/btn:text-white transition-colors text-xl"></i> Офіційні документи
+                                </a>
+                                <a href="#" class="flex justify-center items-center gap-3 px-6 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-brandOrange hover:border-brandOrange transition-all outline-none focus-visible:ring-2 focus-visible:ring-brandOrange group/btn">
+                                    <i class="ph-bold ph-megaphone text-brandOrange group-hover/btn:text-white transition-colors text-xl"></i> Прийняті рішення
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6 items-stretch">
+                        <div class="bg-white/5 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-white/10 hover:border-blue-400/50 transition-all duration-500 group relative overflow-hidden flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                            <div class="absolute -left-20 -bottom-20 w-64 h-64 bg-blue-500/10 rounded-full blur-[50px] group-hover:bg-blue-500/20 transition-colors duration-700 pointer-events-none"></div>
+                            <div class="relative z-10 flex flex-col h-full">
+                                <div class="flex items-center gap-3 mb-6">
+                                    <div class="w-12 h-12 bg-blue-500/20 border border-blue-500/30 rounded-2xl flex items-center justify-center text-blue-400 group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                                        <i class="ph-fill ph-shield-check text-2xl"></i>
+                                    </div>
+                                    <span class="text-blue-400 font-bold text-xs uppercase tracking-widest">Контроль</span>
+                                </div>
+                                <h3 class="text-2xl md:text-3xl font-black text-white mb-4">Наглядова рада</h3>
+                                <p class="text-blue-100/70 text-base md:text-lg leading-relaxed mb-8 flex-grow">
+                                    Наш «внутрішній аудитор». Це незалежний контролюючий орган, який не втручається у щоденні задачі, але жорстко слідкує за 100% прозорістю фінансів.
+                                </p>
+                                
+                                <div class="mt-auto pt-8 border-t border-white/10 grid grid-cols-2 gap-4">
+                                    <a href="#" class="flex justify-center items-center gap-2 px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-blue-500 hover:border-blue-500 transition-all outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+                                        <i class="ph-bold ph-folder-open text-xl"></i> Звіти
+                                    </a>
+                                    <a href="#" class="flex justify-center items-center gap-2 px-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-red-500 hover:border-red-500 transition-all outline-none focus-visible:ring-2 focus-visible:ring-red-500">
+                                        <i class="ph-bold ph-warning-circle text-xl"></i> Лінія довіри
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-white/10 hover:border-green-400/50 transition-all duration-500 group relative overflow-hidden flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                            <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-green-500/10 rounded-full blur-[50px] group-hover:bg-green-500/20 transition-colors duration-700 pointer-events-none"></div>
+                            <div class="relative z-10 flex flex-col h-full">
+                                <div class="flex items-center gap-3 mb-6">
+                                    <div class="w-12 h-12 bg-green-500/20 border border-green-500/30 rounded-2xl flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500 group-hover:text-white transition-all">
+                                        <i class="ph-fill ph-rocket-launch text-2xl"></i>
+                                    </div>
+                                    <span class="text-green-400 font-bold text-xs uppercase tracking-widest">Операційна діяльність</span>
+                                </div>
+                                <h3 class="text-2xl md:text-3xl font-black text-white mb-4">Директор (СЕО)</h3>
+                                <p class="text-blue-100/70 text-base md:text-lg leading-relaxed mb-8 flex-grow">
+                                    Наш «двигун». Людина, яка керує щоденною роботою, управляє фінансами, наймає команду та несе відповідальність за бездоганну екзекуцію проєктів.
+                                </p>
+                                
+                                <div class="mt-auto pt-8 border-t border-white/10 flex flex-col gap-4">
+                                    <a href="#" target="_blank" class="flex justify-between items-center px-6 py-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-400 font-bold text-sm hover:bg-green-500 hover:text-white transition-all shadow-[0_0_15px_rgba(74,222,128,0.1)] hover:shadow-[0_0_20px_rgba(74,222,128,0.3)]">
+                                        <span class="flex items-center gap-3"><i class="ph-bold ph-newspaper text-xl"></i> Новини від Директора</span>
+                                        <i class="ph-bold ph-arrow-up-right text-lg"></i>
+                                    </a>
+                                    
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <a href="https://t.me/scd_ceo" target="_blank" class="flex justify-center items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-[#2AABEE] hover:border-[#2AABEE] transition-all outline-none focus-visible:ring-2 focus-visible:ring-[#2AABEE]">
+                                            <i class="ph-fill ph-telegram-logo text-xl"></i> СЕО
+                                        </a>
+                                        <a href="https://t.me/scd_deputy" target="_blank" class="flex justify-center items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white font-bold text-sm hover:bg-[#2AABEE] hover:border-[#2AABEE] transition-all outline-none focus-visible:ring-2 focus-visible:ring-[#2AABEE]">
+                                            <i class="ph-fill ph-telegram-logo text-xl"></i> Заступник
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/5 backdrop-blur-xl p-8 md:p-10 rounded-[2.5rem] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-8 mt-4" data-aos="fade-up">
+                        <div>
+                            <h4 class="text-white font-black text-xl md:text-2xl mb-2 flex items-center gap-3">
+                                <i class="ph-duotone ph-book-open text-brandOrange"></i> Офіційний Статут ГО
+                            </h4>
+                            <p class="text-blue-100/60 text-sm md:text-base font-medium max-w-2xl">
+                                Діяльність керівництва та всіх органів управління суворо регламентована. Жодних одноосібних рішень поза межами повноважень. Ознайомтеся з нашими правилами.
+                            </p>
+                        </div>
+                        <a href="#" class="shrink-0 flex items-center justify-center gap-3 w-full md:w-auto px-8 py-5 bg-brandOrange text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:shadow-glow hover:-translate-y-1 transition-all outline-none focus-visible:ring-4 focus-visible:ring-white">
+                            <i class="ph-bold ph-download-simple text-xl"></i> Читати Статут
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!--         <section id="join-section" class="py-32 md:py-40 bg-brandGray relative overflow-hidden border-t border-gray-200">
+            <div class="max-w-[1400px] mx-auto px-6 relative z-10">
+                <div class="text-center mb-16 md:mb-24" data-aos="fade-up">
+                    <span class="text-brandOrange font-black text-xs uppercase tracking-[0.3em] mb-4 block">HR та Рекрутинг</span>
+                    <h2 class="text-5xl md:text-7xl font-black text-brandBlueDark tracking-tighter leading-none mb-6">
+                        ТВІЙ РІСТ <br> У <span class="text-gradient-orange italic pr-2">КОМАНДІ</span> СЦД.
+                    </h2>
+                    <p class="text-gray-500 font-medium text-lg md:text-xl max-w-2xl mx-auto">У нас немає «стелі». Ти сам визначаєш, як далеко хочеш зайти. Ми використовуємо професійні грейди.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+                    <div class="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100 hover:border-brandOrange/50 hover:shadow-premium transition-all group cursor-default" data-aos="fade-up" data-aos-delay="100">
+                        <span class="text-brandOrange font-black text-4xl opacity-20 group-hover:opacity-100 transition-opacity">01</span>
+                        <h4 class="text-brandBlueDark font-black text-lg mt-4 mb-2">Новачок</h4>
+                        <p class="text-gray-500 text-xs leading-relaxed font-medium">Допомагає з базовими завданнями, вивчає процеси та отримує доступ до внутрішньої бази знань.</p>
+                    </div>
+                    <div class="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100 hover:border-brandOrange/50 hover:shadow-premium transition-all group cursor-default" data-aos="fade-up" data-aos-delay="200">
+                        <span class="text-brandOrange font-black text-4xl opacity-20 group-hover:opacity-100 transition-opacity">02</span>
+                        <h4 class="text-brandBlueDark font-black text-lg mt-4 mb-2">Активний учасник</h4>
+                        <p class="text-gray-500 text-xs leading-relaxed font-medium">Самостійно закриває блок завдань у проєкті без мікроменеджменту. Доступ до нетворку ГО.</p>
+                    </div>
+                    <div class="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100 hover:border-brandOrange/50 hover:shadow-premium transition-all group cursor-default" data-aos="fade-up" data-aos-delay="300">
+                        <span class="text-brandOrange font-black text-4xl opacity-20 group-hover:opacity-100 transition-opacity">03</span>
+                        <h4 class="text-brandBlueDark font-black text-lg mt-4 mb-2">Координатор</h4>
+                        <p class="text-gray-500 text-xs leading-relaxed font-medium">Керує міні-командою або складним напрямком. Повна відповідальність за результат та дедлайни.</p>
+                    </div>
+                    <div class="bg-white p-6 md:p-8 rounded-[2rem] border border-gray-100 hover:border-brandOrange/50 hover:shadow-premium transition-all group cursor-default" data-aos="fade-up" data-aos-delay="400">
+                        <span class="text-brandOrange font-black text-4xl opacity-20 group-hover:opacity-100 transition-opacity">04</span>
+                        <h4 class="text-brandBlueDark font-black text-lg mt-4 mb-2">Керівник</h4>
+                        <p class="text-gray-500 text-xs leading-relaxed font-medium">Стратег, який управляє цілим комітетом або осередком. Формує партнерства B2B та GR.</p>
+                    </div>
+                    <div class="bg-brandBlueDark p-6 md:p-8 rounded-[2rem] border border-brandOrange shadow-glow group cursor-default" data-aos="fade-up" data-aos-delay="500">
+                        <span class="text-brandOrange font-black text-4xl">05</span>
+                        <h4 class="text-white font-black text-lg mt-4 mb-2">Стратегічний лідер</h4>
+                        <p class="text-white/60 text-xs leading-relaxed font-medium">Управління ГО національного масштабу. Найвищий рівень впливу на громадянське суспільство.</p>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <section id="donate" class="py-32 md:py-40 bg-white relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-1/2 h-full bg-brandGray -z-10 hidden lg:block"></div>
+            
+            <div class="max-w-[1400px] mx-auto px-6 relative z-10">
+                <div class="text-left mb-16 md:mb-24" data-aos="fade-right">
+                    <h2 class="text-6xl md:text-8xl font-black text-brandBlueDark tracking-tighter leading-[0.9] mb-8">
+                        СТАНЬ <br> 
+                        <span class="text-gradient-orange italic pr-4">ЧАСТИНОЮ</span> <br> 
+                        ЗМІН.
+                    </h2>
+                    <p class="text-gray-500 font-medium text-lg md:text-xl max-w-2xl">Допомогти країні можна фінансово або своїми знаннями. Оберіть свій рівень інтеграції.</p>
+                </div>
+                    
+                <div class="grid lg:grid-cols-2 gap-8 md:gap-12">
+                    <div class="p-10 md:p-14 bg-brandBlueDark rounded-[3rem] text-white flex flex-col justify-between shadow-premium transform hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden group">
+    <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-brandOrange/20 blur-[80px] rounded-full group-hover:bg-brandOrange/30 transition-colors"></div>
+    
+    <div class="relative z-10 mb-10">
+        <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-8 backdrop-blur-md border border-white/10 group-hover:bg-white/20 transition-colors">
+            <i class="ph-fill ph-bank text-4xl text-brandOrange"></i>
+        </div>
+        
+        <h4 class="text-3xl font-black mb-4">Фінансова підтримка</h4>
+        <p class="text-blue-100/60 text-base leading-relaxed">
+            100% зібраних коштів інвестуються в статутні проєкти. Ваша довіра повністю захищена Законом України.
+        </p>
+
+        <div class="mt-10 grid grid-cols-3 gap-2 border-t border-white/10 pt-10">
+            <div class="flex flex-col items-center text-center group/icon">
+                <i class="ph-duotone ph-eye text-4xl text-brandOrange mb-3 transition-transform group-hover/icon:scale-110"></i>
+                <span class="text-[10px] font-black uppercase tracking-widest text-white leading-tight">Прозорість</span>
+                <span class="text-[8px] text-white/30 uppercase mt-1 tracking-tighter">Публічні звіти</span>
+            </div>
+            
+            <div class="flex flex-col items-center text-center group/icon">
+                <i class="ph-duotone ph-target text-4xl text-brandOrange mb-3 transition-transform group-hover/icon:scale-110"></i>
+                <span class="text-[10px] font-black uppercase tracking-widest text-white leading-tight">Адресність</span>
+                <span class="text-[8px] text-white/30 uppercase mt-1 tracking-tighter">Пряма дія</span>
+            </div>
+            
+            <div class="flex flex-col items-center text-center group/icon">
+                <i class="ph-duotone ph-shield-check text-4xl text-brandOrange mb-3 transition-transform group-hover/icon:scale-110"></i>
+                <span class="text-[10px] font-black uppercase tracking-widest text-white leading-tight">Захист</span>
+                <span class="text-[8px] text-white/30 uppercase mt-1 tracking-tighter">Юр. контроль</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="space-y-4 relative z-10">
+        <button onclick="copyToClipboard('1111222233334444', this)" class="bg-white text-brandBlueDark w-full py-4 rounded-2xl font-black text-sm md:text-base hover:bg-gray-100 active:scale-95 transition-all flex items-center justify-between px-6 outline-none focus-visible:ring-4 focus-visible:ring-brandOrange">
+            <span class="flex items-center gap-3"><i class="ph-bold ph-credit-card text-xl"></i> Картка (Гривня)</span>
+            <i class="ph-bold ph-copy text-lg text-gray-400"></i>
+        </button>
+
+        <button onclick="copyToClipboard('UA 12 3456 7890 1234 5678 9012 3456', this)" class="bg-brandOrange w-full py-4 rounded-2xl font-black text-sm md:text-base hover:shadow-glow active:scale-95 transition-all flex items-center justify-between px-6 outline-none focus-visible:ring-4 focus-visible:ring-white">
+            <span class="flex items-center gap-3"><i class="ph-bold ph-bank text-xl"></i> IBAN (UAH)</span>
+            <i class="ph-bold ph-copy text-lg"></i>
+        </button>
+        
+        <button onclick="copyToClipboard('TThexampleaddress123456789', this)" class="bg-white/10 w-full py-4 rounded-2xl font-black text-sm md:text-base hover:bg-white/20 transition-all flex items-center justify-between px-6 border border-white/10 outline-none focus-visible:ring-2 focus-visible:ring-white">
+            <span class="flex items-center gap-3"><i class="ph-bold ph-currency-circle-dollar text-xl text-green-400"></i> USDT (TRC20)</span>
+            <i class="ph-bold ph-copy text-lg text-white/50"></i>
+        </button>
+
+        <button onclick="copyToClipboard('bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh', this)" class="bg-white/10 w-full py-4 rounded-2xl font-black text-sm md:text-base hover:bg-white/20 transition-all flex items-center justify-between px-6 border border-white/10 outline-none focus-visible:ring-2 focus-visible:ring-white">
+            <span class="flex items-center gap-3"><i class="ph-bold ph-currency-btc text-xl text-yellow-400"></i> Bitcoin (BTC)</span>
+            <i class="ph-bold ph-copy text-lg text-white/50"></i>
+        </button>
+        
+        <div class="pt-6 mt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-center sm:text-left w-full sm:w-auto">
+                <h5 class="font-bold text-sm text-white">Гуманітарна допомога</h5>
+                <p class="text-white/40 text-xs mt-1">Передати продукти, ліки чи авто</p>
+            </div>
+            <a href="https://t.me/scd_humanitarian" target="_blank" class="px-6 py-3 bg-transparent border-2 border-white/20 text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:border-brandOrange hover:text-brandOrange hover:bg-white/5 transition-all w-full sm:w-auto text-center shrink-0">
+                Зв'язатися
+            </a>
+        </div>
+    </div>
+</div>
+
+                    <div class="p-10 md:p-14 bg-white rounded-[3rem] border border-gray-100 flex flex-col justify-between shadow-premium transform hover:-translate-y-2 transition-transform duration-500 group relative overflow-hidden">
+    <div class="absolute -top-20 -right-20 w-40 h-40 bg-blue-50 rounded-full group-hover:scale-[2.5] transition-transform duration-700 ease-out z-0"></div>
+    
+    <div class="relative z-10 mb-8">
+        <div class="w-16 h-16 bg-brandGray rounded-2xl flex items-center justify-center mb-8 border border-gray-200 group-hover:bg-brandBlueDark group-hover:border-brandBlueDark transition-all duration-300 shadow-sm">
+            <i class="ph-duotone ph-briefcase text-3xl text-brandBlueDark group-hover:text-white transition-colors"></i>
+        </div>
+        
+        <h4 class="text-3xl font-black mb-4 text-brandBlueDark uppercase tracking-tighter">Кого ми шукаємо</h4>
+        <p class="text-gray-500 text-base leading-relaxed">
+            Ми будуємо системну організацію, де кожен фахівець наближає зміни. Долучайся до нас як професіонал або активний волонтер.
+        </p>
+        
+        <ul class="space-y-3 mt-8 pt-8 border-t border-gray-100">
+            <li class="flex items-center justify-between p-4 bg-brandGray rounded-2xl group-hover:bg-white transition-colors border border-transparent group-hover:border-gray-200 group-hover:shadow-sm">
+                <span class="font-bold text-sm text-brandBlueDark flex flex-col gap-1">
+                    <span class="flex items-center gap-3">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brandOrange"></span> 
+                        Юристи та Правозахисники
+                    </span>
+                    <span class="text-[9px] uppercase tracking-widest text-gray-400 ml-4.5">Співробітник <span class="mx-1">/</span> Волонтер</span>
+                </span>
+                <i class="ph-duotone ph-gavel text-brandOrange text-2xl"></i>
+            </li>
+
+            <li class="flex items-center justify-between p-4 bg-brandGray rounded-2xl group-hover:bg-white transition-colors border border-transparent group-hover:border-gray-200 group-hover:shadow-sm">
+                <span class="font-bold text-sm text-brandBlueDark flex flex-col gap-1">
+                    <span class="flex items-center gap-3">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brandOrange"></span> 
+                        Project & Grant Managers
+                    </span>
+                    <span class="text-[9px] uppercase tracking-widest text-gray-400 ml-4.5">Співробітник</span>
+                </span>
+                <i class="ph-duotone ph-chart-line-up text-brandOrange text-2xl"></i>
+            </li>
+
+            <li class="flex items-center justify-between p-4 bg-brandGray rounded-2xl group-hover:bg-white transition-colors border border-transparent group-hover:border-gray-200 group-hover:shadow-sm">
+                <span class="font-bold text-sm text-brandBlueDark flex flex-col gap-1">
+                    <span class="flex items-center gap-3">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brandOrange"></span> 
+                        Медіа та Комунікації
+                    </span>
+                    <span class="text-[9px] uppercase tracking-widest text-gray-400 ml-4.5">Волонтер <span class="mx-1">/</span> Стажер</span>
+                </span>
+                <i class="ph-duotone ph-megaphone text-brandOrange text-2xl"></i>
+            </li>
+
+            <li class="flex items-center justify-between p-4 bg-brandGray rounded-2xl group-hover:bg-white transition-colors border border-transparent group-hover:border-gray-200 group-hover:shadow-sm">
+                <span class="font-bold text-sm text-brandBlueDark flex flex-col gap-1">
+                    <span class="flex items-center gap-3">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brandOrange"></span> 
+                        Координатори місій
+                    </span>
+                    <span class="text-[9px] uppercase tracking-widest text-gray-400 ml-4.5">Волонтер</span>
+                </span>
+                <i class="ph-duotone ph-truck text-brandOrange text-2xl"></i>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="relative z-10 mt-auto pt-4">
+        <button onclick="openJoinModal()" class="bg-transparent border-2 border-brandBlueDark text-brandBlueDark w-full py-4 md:py-5 rounded-2xl font-black text-sm md:text-base uppercase tracking-widest text-center hover:bg-brandBlueDark hover:text-white active:scale-95 transition-all flex items-center justify-center gap-3 outline-none focus-visible:ring-4 focus-visible:ring-brandBlueDark/30">
+            ЗАПОВНИТИ АНКЕТУ <i class="ph-bold ph-arrow-right"></i>
+        </button>
+        <p class="text-center text-[10px] text-gray-400 mt-4 font-bold uppercase tracking-[0.2em]">Розгляд заявки протягом 48 годин</p>
+    </div>
+</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-brandBlueDark py-16 md:py-24 border-t border-white/5 relative overflow-hidden bg-grid-pattern-dark">
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-40 bg-brandBlue opacity-30 blur-[100px] rounded-t-full pointer-events-none"></div>
+
+        <div class="max-w-[1400px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10 relative z-10">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-brandOrange rounded-xl flex items-center justify-center text-white font-black text-lg shadow-glow">С</div>
+                <span class="font-black text-2xl text-white tracking-tighter">СЦД <span class="text-white/20 ml-2 font-normal">|</span> <span class="text-brandOrange ml-2 text-sm uppercase tracking-widest">Головний штаб</span></span>
+            </div>
+            
+            <p class="text-white/30 text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-center md:text-left">Інституційна сила <br class="md:hidden"> • Нуль корупції • 2026</p>
+            
+            <div class="flex gap-6 text-white/50 text-2xl">
+                <a href="#" aria-label="Instagram" class="hover:text-brandOrange hover:scale-110 transition-all outline-none focus-visible:text-brandOrange"><i class="ph-fill ph-instagram-logo"></i></a>
+                <a href="#" aria-label="Facebook" class="hover:text-blue-500 hover:scale-110 transition-all outline-none focus-visible:text-blue-500"><i class="ph-fill ph-facebook-logo"></i></a>
+                <a href="#" aria-label="Telegram" class="hover:text-blue-400 hover:scale-110 transition-all outline-none focus-visible:text-blue-400"><i class="ph-fill ph-telegram-logo"></i></a>
+            </div>
+        </div>
+    </footer>
+
+  
+<!-- МОДАЛЬНІ ВІКНА -->
+<!-- Вікно для головної секції -->
+        <div id="mainModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 backdrop-blur-xl bg-brandBlueDark/60">
+    <div class="bg-white w-full max-w-xl rounded-[3rem] overflow-hidden shadow-2xl relative modal-zoom-in">
+        <button onclick="closeActiveModal()" class="absolute top-6 right-6 p-3 bg-brandGray rounded-full hover:bg-brandOrange hover:text-white transition-all z-10">
+            <i class="ph ph-x text-xl"></i>
+        </button>
+
+        <div id="helpFlow" class="hidden p-10">
+            <div id="helpStep1">
+                <h3 class="text-3xl font-black text-brandBlueDark mb-2 uppercase italic">Оберіть тип допомоги</h3>
+                <p class="text-gray-500 mb-8 font-medium">Ми розглянемо ваш запит протягом 24 годин</p>
+                
+                <div class="space-y-4 mb-10">
+                    <label class="flex items-center justify-between p-5 border-2 border-brandGray rounded-2xl cursor-pointer hover:border-brandOrange transition-all group has-[:checked]:border-brandOrange has-[:checked]:bg-brandOrange/5">
+                        <span class="font-bold text-brandBlueDark">Фінансова допомога</span>
+                        <input type="radio" name="helpType" value="financial" class="w-6 h-6 accent-brandOrange">
+                    </label>
+                    <label class="flex items-center justify-between p-5 border-2 border-brandGray rounded-2xl cursor-pointer hover:border-brandOrange transition-all group has-[:checked]:border-brandOrange has-[:checked]:bg-brandOrange/5">
+                        <span class="font-bold text-brandBlueDark">Юридична допомога</span>
+                        <input type="radio" name="helpType" value="legal" class="w-6 h-6 accent-brandOrange">
+                    </label>
+                    <label class="flex items-center justify-between p-5 border-2 border-brandGray rounded-2xl cursor-pointer hover:border-brandOrange transition-all group has-[:checked]:border-brandOrange has-[:checked]:bg-brandOrange/5">
+                        <span class="font-bold text-brandBlueDark">Психологічна допомога</span>
+                        <input type="radio" name="helpType" value="psychological" class="w-6 h-6 accent-brandOrange">
+                    </label>
+                </div>
+                <button onclick="nextStep('help', 2)" class="w-full py-5 bg-brandBlueDark text-white rounded-2xl font-black uppercase tracking-widest hover:bg-brandOrange transition-all shadow-glow">Продовжити</button>
+            </div>
+
+            <div id="helpStep2" class="hidden">
+                <h3 class="text-3xl font-black text-brandBlueDark mb-2 uppercase italic">Контактні дані</h3>
+                <p class="text-gray-500 mb-8 font-medium">Залиште дані для зв'язку з фахівцем</p>
+                <div class="space-y-4 mb-8">
+                    <input type="text" placeholder="Ваше ім'я" class="w-full p-5 bg-brandGray rounded-2xl border-none focus:ring-2 focus:ring-brandOrange font-bold text-brandBlueDark">
+                    <input type="text" placeholder="Номер телефону або Telegram" class="w-full p-5 bg-brandGray rounded-2xl border-none focus:ring-2 focus:ring-brandOrange font-bold text-brandBlueDark">
+                </div>
+                <button class="w-full py-5 bg-brandOrange text-white rounded-2xl font-black uppercase tracking-widest hover:shadow-glow transition-all">Відправити запит</button>
+            </div>
+        </div>
+
+        <div id="joinFlow" class="hidden p-10">
+            <div id="joinStep1">
+                <h3 class="text-3xl font-black text-brandBlueDark mb-2 uppercase italic">Формат участі</h3>
+                <p class="text-gray-500 mb-8 font-medium">Як ви бажаєте співпрацювати з нами?</p>
+                <div class="grid grid-cols-1 gap-4 mb-10">
+                    <label class="flex items-center justify-between p-6 border-2 border-brandGray rounded-2xl cursor-pointer hover:border-brandOrange transition-all has-[:checked]:border-brandOrange has-[:checked]:bg-brandOrange/5">
+                        <div>
+                            <span class="block font-black text-brandBlueDark uppercase">Волонтер</span>
+                            <span class="text-xs text-gray-400 font-bold uppercase tracking-widest">На громадських засадах</span>
+                        </div>
+                        <input type="radio" name="workType" value="volunteer" class="w-6 h-6 accent-brandOrange">
+                    </label>
+                    <label class="flex items-center justify-between p-6 border-2 border-brandGray rounded-2xl cursor-pointer hover:border-brandOrange transition-all has-[:checked]:border-brandOrange has-[:checked]:bg-brandOrange/5">
+                        <div>
+                            <span class="block font-black text-brandBlueDark uppercase">Співробітник</span>
+                            <span class="text-xs text-gray-400 font-bold uppercase tracking-widest">Платна основа</span>
+                        </div>
+                        <input type="radio" name="workType" value="employee" class="w-6 h-6 accent-brandOrange">
+                    </label>
+                </div>
+                <button onclick="nextStep('join', 2)" class="w-full py-5 bg-brandBlueDark text-white rounded-2xl font-black uppercase tracking-widest hover:bg-brandOrange transition-all">Далі</button>
+            </div>
+
+            <div id="joinStep2" class="hidden">
+                <h3 class="text-2xl font-black text-brandBlueDark mb-2 uppercase italic">Оберіть напрямок</h3>
+                <div class="grid grid-cols-2 gap-3 mb-8 max-h-[300px] overflow-y-auto pr-2 custom-scroll">
+                    <label class="p-3 border-2 border-brandGray rounded-xl cursor-pointer text-xs font-bold text-brandBlueDark flex items-center gap-2 has-[:checked]:border-brandOrange">
+                        <input type="checkbox" class="accent-brandOrange"> Охорона здоров'я
+                    </label>
+                    <label class="p-3 border-2 border-brandGray rounded-xl cursor-pointer text-xs font-bold text-brandBlueDark flex items-center gap-2 has-[:checked]:border-brandOrange">
+                        <input type="checkbox" class="accent-brandOrange"> Протидія корупції
+                    </label>
+                    <label class="p-3 border-2 border-brandGray rounded-xl cursor-pointer text-xs font-bold text-brandBlueDark flex items-center gap-2 has-[:checked]:border-brandOrange">
+                        <input type="checkbox" class="accent-brandOrange"> Освіта та молодь
+                    </label>
+                    <label class="p-3 border-2 border-brandGray rounded-xl cursor-pointer text-xs font-bold text-brandBlueDark flex items-center gap-2 has-[:checked]:border-brandOrange">
+                        <input type="checkbox" class="accent-brandOrange"> Соціальний захист
+                    </label>
+                    <label class="p-3 border-2 border-brandGray rounded-xl cursor-pointer text-xs font-bold text-brandBlueDark flex items-center gap-2 has-[:checked]:border-brandOrange">
+                        <input type="checkbox" class="accent-brandOrange"> Правовий захист
+                    </label>
+                    <label class="p-3 border-2 border-brandGray rounded-xl cursor-pointer text-xs font-bold text-brandBlueDark flex items-center gap-2 has-[:checked]:border-brandOrange">
+                        <input type="checkbox" class="accent-brandOrange"> Міжнародна співпраця
+                    </label>
+                    <label class="p-3 border-2 border-brandGray rounded-xl cursor-pointer text-xs font-bold text-brandBlueDark flex items-center gap-2 has-[:checked]:border-brandOrange">
+                        <input type="checkbox" class="accent-brandOrange"> Допомога дітям
+                    </label>
+                    <label class="p-3 border-2 border-brandGray rounded-xl cursor-pointer text-xs font-bold text-brandBlueDark flex items-center gap-2 has-[:checked]:border-brandOrange">
+                        <input type="checkbox" class="accent-brandOrange"> Підтримка ветеранів
+                    </label>
+                    <label class="p-3 border-2 border-brandGray rounded-xl cursor-pointer text-xs font-bold text-brandBlueDark flex items-center gap-2 has-[:checked]:border-brandOrange">
+                        <input type="checkbox" class="accent-brandOrange"> Гуманітарна допомога
+                    </label>
+                </div>
+                <button onclick="nextStep('join', 3)" class="w-full py-5 bg-brandBlueDark text-white rounded-2xl font-black uppercase tracking-widest hover:bg-brandOrange transition-all">Далі</button>
+            </div>
+
+            <div id="joinStep3" class="hidden">
+                <h3 class="text-3xl font-black text-brandBlueDark mb-2 uppercase italic">Анкета</h3>
+                <div class="space-y-4 mb-8">
+                    <input type="text" placeholder="Прізвище, Ім'я, По батькові" class="w-full p-5 bg-brandGray rounded-2xl border-none focus:ring-2 focus:ring-brandOrange font-bold text-brandBlueDark">
+                    <input type="text" placeholder="Номер телефону / Telegram" class="w-full p-5 bg-brandGray rounded-2xl border-none focus:ring-2 focus:ring-brandOrange font-bold text-brandBlueDark">
+                </div>
+                <button class="w-full py-5 bg-brandOrange text-white rounded-2xl font-black uppercase tracking-widest hover:shadow-glow transition-all">Надіслати анкету</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
+<!-- Вікно для комітетів  -->
+
+<div id="committeeModal" class="fixed inset-0 z-[999] hidden items-center justify-center p-4">
+    <div onclick="closeCommitteeModal()" class="absolute inset-0 modal-backdrop-blur bg-brandBlueDark/40"></div>
+    
+    <div class="bg-white w-full max-w-5xl rounded-[3rem] shadow-2xl relative z-10 overflow-hidden modal-zoom-in flex flex-col md:flex-row max-h-[95vh] overflow-y-auto md:overflow-hidden">
+        
+        <button onclick="closeCommitteeModal()" class="absolute top-6 right-6 w-12 h-12 bg-brandGray hover:bg-brandOrange hover:text-white flex items-center justify-center rounded-full transition-all z-20">
+            <i class="ph ph-x text-2xl"></i>
+        </button>
+
+        <div id="modalSidePanel" class="md:w-2/5 p-12 bg-brandBlue flex flex-col items-center justify-center text-center text-white">
+            <div id="modalIconContainer" class="w-28 h-28 bg-white/10 rounded-[2.5rem] flex items-center justify-center mb-8 border border-white/20">
+                <i id="modalIcon" class="ph-duotone ph-first-aid text-7xl"></i>
+            </div>
+            <h3 id="modalTitle" class="text-3xl font-black leading-tight mb-4">Назва</h3>
+            <div class="h-1 w-12 bg-brandOrange rounded-full"></div>
+        </div>
+
+        <div class="md:w-3/5 p-8 md:p-16 bg-white flex flex-col justify-center">
+            <span class="text-brandOrange font-bold tracking-widest uppercase text-xs mb-4 block">Детальна експертиза</span>
+            <h2 class="text-3xl font-black text-brandBlueDark mb-6 leading-tight">Стратегічні цілі та результати</h2>
+            
+            <p id="modalDescription" class="text-gray-500 text-lg mb-8 leading-relaxed font-medium">
+                Тут буде детальний опис напрямку...
+            </p>
+
+            <div id="modalFeaturesGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 mb-10">
+                </div>
+
+            <div class="mt-auto">
+                <a id="modalPageBtn" href="#" class="inline-flex items-center gap-4 bg-brandBlueDark text-white px-10 py-5 rounded-2xl font-bold hover:bg-brandOrange hover:shadow-glow transition-all group">
+                    <span>Докладно про комітет</span>
+                    <i class="ph ph-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+      
+<!-- Команда -->
+<div id="teamModal" class="fixed inset-0 z-[110] hidden items-center justify-center p-4 backdrop-blur-2xl bg-brandBlueDark/80">
+    <div class="bg-white w-full max-w-5xl rounded-[3rem] shadow-2xl relative modal-zoom-in flex flex-col max-h-[90vh]">
+        
+        <div class="p-8 md:p-12 border-b border-gray-100 flex justify-between items-center shrink-0">
+            <div>
+                <span class="text-brandOrange font-black text-xs uppercase tracking-[0.3em] mb-2 block">Структура СЦД</span>
+                <h3 class="text-3xl md:text-5xl font-black text-brandBlueDark tracking-tighter">НАША <span class="text-gradient-orange">КОМАНДА.</span></h3>
+            </div>
+            <button onclick="closeTeamModal()" class="w-12 h-12 bg-brandGray flex items-center justify-center rounded-full hover:bg-brandOrange hover:text-white transition-all">
+                <i class="ph ph-x text-2xl"></i>
+            </button>
+        </div>
+
+        <div class="p-8 md:p-12 overflow-y-auto team-scroll bg-brandGray/30">
+            <div class="space-y-16">
+                
+                <section>
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="h-px flex-grow bg-gray-200"></div>
+                        <h4 class="text-xs font-black uppercase tracking-[0.4em] text-gray-400">Вище керівництво</h4>
+                        <div class="h-px flex-grow bg-gray-200"></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-brandBlueDark p-6 rounded-[2rem] flex items-center gap-6 border border-white/5 shadow-premium">
+                            <div class="w-20 h-20 bg-brandOrange rounded-2xl flex items-center justify-center shrink-0">
+                                <i class="ph-fill ph-user text-4xl text-white"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-white font-black text-xl leading-tight">Ольга В.Б.</h5>
+                                <p class="text-brandOrange text-xs font-bold uppercase tracking-widest mt-1">Директор (CEO)</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-[2rem] flex items-center gap-6 border border-gray-100 shadow-sm">
+                            <div class="w-20 h-20 bg-brandGray rounded-2xl flex items-center justify-center shrink-0 border border-gray-100">
+                                <i class="ph-fill ph-user-focus text-4xl text-brandBlue"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-brandBlueDark font-black text-xl leading-tight">Євген В.Ч.</h5>
+                                <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mt-1">Заступник директора</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="h-px flex-grow bg-gray-200"></div>
+                        <h4 class="text-xs font-black uppercase tracking-[0.4em] text-gray-400">Голови комітетів</h4>
+                        <div class="h-px flex-grow bg-gray-200"></div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-white p-5 rounded-3xl border border-gray-100 hover:border-brandOrange transition-colors flex items-center gap-4">
+                            <div class="w-12 h-12 bg-brandGray rounded-xl flex items-center justify-center text-brandBlue"><i class="ph ph-first-aid text-xl"></i></div>
+                            <div>
+                                <h6 class="font-black text-brandBlueDark text-sm">Комітет медицини</h6>
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Дмитро Світлий</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-3xl border border-gray-100 hover:border-brandOrange transition-colors flex items-center gap-4">
+                            <div class="w-12 h-12 bg-brandGray rounded-xl flex items-center justify-center text-brandBlue"><i class="ph ph-magnifying-glass text-xl"></i></div>
+                            <div>
+                                <h6 class="font-black text-brandBlueDark text-sm">Антикорупційний блок</h6>
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Артур Правосуд</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-3xl border border-gray-100 hover:border-brandOrange transition-colors flex items-center gap-4">
+                            <div class="w-12 h-12 bg-brandGray rounded-xl flex items-center justify-center text-brandBlue"><i class="ph ph-student text-xl"></i></div>
+                            <div>
+                                <h6 class="font-black text-brandBlueDark text-sm">Освіта та молодь</h6>
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Анна Просвіта</p>
+                            </div>
+                        </div>
+                        </div>
+                </section>
+
+                <section>
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="h-px flex-grow bg-gray-200"></div>
+                        <h4 class="text-xs font-black uppercase tracking-[0.4em] text-gray-400">Наш актив</h4>
+                        <div class="h-px flex-grow bg-gray-200"></div>
+                    </div>
+                    <div class="bg-white rounded-[2.5rem] border border-gray-100 overflow-hidden">
+                        <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-y divide-gray-50">
+                            <div class="p-6 text-center">
+                                <div class="text-2xl font-black text-brandBlueDark">45+</div>
+                                <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Штатних співробітників</div>
+                            </div>
+                            <div class="p-6 text-center">
+                                <div class="text-2xl font-black text-brandBlueDark">120+</div>
+                                <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Постійних волонтерів</div>
+                            </div>
+                            <div class="p-6 text-center">
+                                <div class="text-2xl font-black text-brandBlueDark">12</div>
+                                <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Юристів-експертів</div>
+                            </div>
+                            <div class="p-6 text-center">
+                                <div class="text-2xl font-black text-brandBlueDark">08</div>
+                                <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Регіональних лідерів</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="bg-brandOrange/5 border border-brandOrange/20 rounded-[2.5rem] p-8 md:p-12 text-center">
+                    <h4 class="text-2xl font-black text-brandBlueDark mb-4 italic uppercase tracking-tighter">Бракує лише тебе?</h4>
+                    <p class="text-gray-500 font-medium mb-8 max-w-lg mx-auto leading-relaxed text-sm">Приєднуйся до нашої інституційної команди та втілюй зміни на національному рівні.</p>
+                    <button onclick="closeTeamModal(); openJoinModal();" class="bg-brandBlueDark text-white px-8 py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] hover:bg-brandOrange transition-all shadow-lg">Хочу в команду</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true, easing: 'ease-out-expo', offset: 50 });
+
+        const navbar = document.getElementById('navbar');
+        const logoText = document.getElementById('logo-text');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.firstElementChild.classList.add('bg-white/95', 'backdrop-blur-2xl', 'shadow-premium', 'border-transparent');
+                navbar.firstElementChild.classList.remove('border-white/10');
+                logoText.classList.replace('text-white', 'text-brandBlue');
+                navbar.querySelectorAll('a.text-white\\/60, a.text-white\\/80').forEach(el => {
+                    el.classList.replace('text-white/60', 'text-gray-500');
+                    el.classList.replace('text-white/80', 'text-gray-500');
+                });
+            } else {
+                navbar.firstElementChild.classList.remove('bg-white/95', 'backdrop-blur-2xl', 'shadow-premium', 'border-transparent');
+                navbar.firstElementChild.classList.add('border-white/10');
+                logoText.classList.replace('text-brandBlue', 'text-white');
+                navbar.querySelectorAll('a.text-gray-500').forEach(el => {
+                    el.classList.replace('text-gray-500', 'text-white/80');
+                });
+            }
+        });
+
+        // Ідеальний плавний скрол із кривою easeInOutCubic
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetEl = document.querySelector(targetId);
+                if(!targetEl) return;
+
+                const targetPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+                const startPosition = window.scrollY;
+                const distance = targetPosition - startPosition;
+                const duration = 1500;
+                let start = null;
+
+                function easeInOutCubic(t, b, c, d) {
+                    t /= d/2;
+                    if (t < 1) return c/2*t*t*t + b;
+                    t -= 2;
+                    return c/2*(t*t*t + 2) + b;
+                }
+
+                function animation(currentTime) {
+                    if (start === null) start = currentTime;
+                    const timeElapsed = currentTime - start;
+                    const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+                    window.scrollTo(0, run);
+                    if (timeElapsed < duration) requestAnimationFrame(animation);
+                }
+                requestAnimationFrame(animation);
+            });
+        });
+
+        function copyToClipboard(text, btn) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="ph-bold ph-check text-xl"></i> СКОПІЙОВАНО';
+                
+                if(btn.classList.contains('bg-white')) {
+                    btn.classList.replace('bg-white', 'bg-green-600');
+                    btn.classList.replace('text-brandBlueDark', 'text-white');
+                } else {
+                    btn.classList.replace('bg-brandOrange', 'bg-green-600');
+                    btn.classList.replace('bg-white/10', 'bg-green-600');
+                }
+                
+                btn.classList.add('shadow-[0_0_30px_rgba(34,197,94,0.5)]');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.classList.remove('shadow-[0_0_30px_rgba(34,197,94,0.5)]');
+                    
+                    if(btn.classList.contains('bg-green-600') && originalHTML.includes('Картка')) {
+                        btn.classList.replace('bg-green-600', 'bg-white');
+                        btn.classList.replace('text-white', 'text-brandBlueDark');
+                    } else if(originalHTML.includes('IBAN')) {
+                        btn.classList.replace('bg-green-600', 'bg-brandOrange');
+                    } else {
+                        btn.classList.replace('bg-green-600', 'bg-white/10');
+                    }
+                }, 2000);
+            });
+        }
+      
+      //КОМИТЕТИ
+      const committeeInfo = {
+    medical: {
+        title: "Охорона здоров’я",
+        icon: "ph-first-aid",
+        color: "bg-brandBlue",
+        desc: "Ми створюємо умови для якісної медичної допомоги через модернізацію закладів та забезпечення критично важливими медикаментами прифронтових зон.",
+        features: ["Медикаменти для ВПО", "Оснащення шпиталів", "Програми реабілітації", "Тактична медицина"],
+        url: "medical.html"
+    },
+    anticor: {
+        title: "Протидія корупції",
+        icon: "ph-magnifying-glass",
+        color: "bg-[#0a1d37]",
+        desc: "Впровадження прозорих інструментів контролю за використанням бюджетних коштів та проведення незалежних антикорупційних розслідувань.",
+        features: ["Аудит закупівель", "Правова експертиза", "Моніторинг тендерів", "Звіти для громад"],
+        url: "anticor.html"
+    },
+    education: {
+        title: "Освіта та молодь",
+        icon: "ph-student",
+        color: "bg-brandBlue",
+        desc: "Формування нової генерації лідерів через освітні проекти, розвиток критичного мислення та підтримку талановитої молоді.",
+        features: ["Тренінги лідерства", "Медіаграмотність", "Молодіжні форуми", "Стипендії СЦД"],
+        url: "education.html"
+    },
+    social: {
+        title: "Соціальний захист",
+        icon: "ph-users-four",
+        color: "bg-[#0a1d37]",
+        desc: "Забезпечення гідних умов життя для тих, хто постраждав від війни, та системна допомога вразливим категоріям населення.",
+        features: ["Прихистки для ВПО", "Допомога людям з інв.", "Гуманітарна підтримка", "Психосоціальна адаптація"],
+        url: "social.html"
+    },
+    legal: {
+        title: "Правовий захист",
+        icon: "ph-gavel",
+        color: "bg-brandBlue",
+        desc: "Кваліфікований юридичний супровід та захист прав громадян, які зіткнулися з несправедливістю або правовими труднощами під час війни.",
+        features: ["Безоплатні консультації", "Захист прав у судах", "Законодавчі ініціативи", "Документування воєнних злочинів"],
+        url: "legal.html"
+    },
+    international: {
+        title: "Міжнародна співпраця",
+        icon: "ph-globe-hemisphere-west",
+        color: "bg-[#0a1d37]",
+        desc: "Будування мостів з іноземними партнерами для залучення інвестицій та грантів у розвиток українського громадянського суспільства.",
+        features: ["Співпраця з ЄС", "Грантові програми", "Культурна дипломатія", "Протидія дезінформації"],
+        url: "international.html"
+    },
+    children: {
+        title: "Допомога дітям",
+        icon: "ph-baby",
+        color: "bg-brandBlue",
+        desc: "Захист інтересів найменших українців, підтримка дитячих будинків та організація термінового лікування для важкохворих дітей.",
+        features: ["Оздоровчі табори", "Ліки для дітей", "Підтримка сиріт", "Розвиваючі хаби"],
+        url: "children.html"
+    },
+    veterans: {
+        title: "Підтримка ветеранів",
+        icon: "ph-medal",
+        color: "bg-[#0a1d37]",
+        desc: "Комплексна програма реінтеграції захисників у цивільне життя, включаючи медичну, психологічну та кар'єрну допомогу.",
+        features: ["Протезування", "Перенавчання", "Юридичний супровід", "Ветеранський бізнес"],
+        url: "veterans.html"
+    },
+    humanitarian: {
+        title: "Гуманітарна допомога",
+        icon: "ph-package",
+        color: "bg-brandOrange",
+        desc: "Налагоджена система логістики, що дозволяє швидко доставляти продукти, засоби гігієни та речі першої необхідності у прифронтові громади.",
+        features: ["Власні логістичні хаби", "Гарячі обіди", "Мобільні бригади", "Адресна доставка"],
+        url: "humanitarian.html"
+    }
+};
+
+function openCommitteeModal(id) {
+    const data = committeeInfo[id];
+    if (!data) return;
+
+    // Оновлюємо контент
+    document.getElementById('modalTitle').innerText = data.title;
+    document.getElementById('modalDescription').innerText = data.desc;
+    document.getElementById('modalIcon').className = `ph-duotone ${data.icon} text-7xl`;
+    document.getElementById('modalSidePanel').className = `md:w-2/5 p-12 flex flex-col items-center justify-center text-center text-white transition-all duration-700 ${data.color}`;
+    document.getElementById('modalPageBtn').href = data.url;
+
+    // Оновлюємо список переваг з іконками
+    const featuresContainer = document.getElementById('modalFeaturesGrid');
+    featuresContainer.innerHTML = data.features.map(feat => `
+        <div class="flex items-center gap-3 bg-brandGray/50 p-4 rounded-xl border border-gray-100 hover:border-brandOrange/30 transition-colors">
+            <i class="ph-bold ph-check-circle text-brandOrange text-xl"></i>
+            <span class="text-brandBlueDark font-bold text-sm">${feat}</span>
+        </div>
+    `).join('');
+
+    // Показуємо модалку
+    const modal = document.getElementById('committeeModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.classList.add('modal-active');
+}
+
+function closeCommitteeModal() {
+    const modal = document.getElementById('committeeModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.classList.remove('modal-active');
+}
+
+// Закриття клавішею Esc
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCommitteeModal();
+});
+      
+      
+// Модалка для первой секции
+function openHelpModal() {
+    resetSteps();
+    document.getElementById('mainModal').classList.remove('hidden');
+    document.getElementById('mainModal').classList.add('flex');
+    document.getElementById('helpFlow').classList.remove('hidden');
+}
+
+function openJoinModal() {
+    resetSteps();
+    document.getElementById('mainModal').classList.remove('hidden');
+    document.getElementById('mainModal').classList.add('flex');
+    document.getElementById('joinFlow').classList.remove('hidden');
+}
+
+function resetSteps() {
+    // Приховуємо всі потоки та кроки
+    ['helpFlow', 'joinFlow'].forEach(id => document.getElementById(id).classList.add('hidden'));
+    ['helpStep1', 'helpStep2', 'joinStep1', 'joinStep2', 'joinStep3'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+    });
+    // Активуємо перші кроки
+    document.getElementById('helpStep1').classList.remove('hidden');
+    document.getElementById('joinStep1').classList.remove('hidden');
+}
+
+function nextStep(flow, step) {
+    // Логіка перемикання кроків
+    const currentFlowStepId = flow + 'Step' + (step - 1);
+    const nextFlowStepId = flow + 'Step' + step;
+    
+    document.getElementById(currentFlowStepId).classList.add('hidden');
+    document.getElementById(nextFlowStepId).classList.remove('hidden');
+}
+
+function closeActiveModal() {
+    document.getElementById('mainModal').classList.add('hidden');
+    document.getElementById('mainModal').classList.remove('flex');
+}
+
+// Закриття по кліку на фон
+document.getElementById('mainModal').addEventListener('click', function(e) {
+    if (e.target === this) closeActiveModal();
+});
+      
+      
+// Мадалка для команди
+function openTeamModal() {
+    document.getElementById('teamModal').classList.remove('hidden');
+    document.getElementById('teamModal').classList.add('flex');
+    document.body.style.overflow = 'hidden'; // Заборона прокрутки фону
+}
+
+function closeTeamModal() {
+    document.getElementById('teamModal').classList.add('hidden');
+    document.getElementById('teamModal').classList.remove('flex');
+    document.body.style.overflow = 'auto'; // Відновлення прокрутки фону
+}
+
+// Закриття по кліку на фон
+document.getElementById('teamModal').addEventListener('click', function(e) {
+    if (e.target === this) closeTeamModal();
+});
+      
+function toggleAuthWidget(isClosing) {
+    const expanded = document.getElementById('expanded-panel');
+    const collapsed = document.getElementById('collapsed-icon');
+    
+    if (isClosing) {
+        // Ховаємо панель
+        expanded.style.opacity = '0';
+        expanded.style.transform = 'scale(0.8) translateX(20px)';
+        
+        setTimeout(() => {
+            expanded.style.display = 'none';
+            collapsed.classList.remove('hidden');
+            collapsed.classList.add('flex', 'widget-zoom');
+        }, 300);
+        
+        sessionStorage.setItem('authWidgetCollapsed', 'true');
+    } else {
+        // Показуємо панель
+        collapsed.classList.add('hidden');
+        collapsed.classList.remove('flex');
+        expanded.style.display = 'flex';
+        
+        setTimeout(() => {
+            expanded.style.opacity = '1';
+            expanded.style.transform = 'scale(1) translateX(0)';
+            expanded.classList.add('widget-zoom');
+        }, 10);
+        
+        sessionStorage.removeItem('authWidgetCollapsed');
+    }
+}
+
+// Ініціалізація при завантаженні
+document.addEventListener('DOMContentLoaded', () => {
+    const isCollapsed = sessionStorage.getItem('authWidgetCollapsed');
+    const expanded = document.getElementById('expanded-panel');
+    const collapsed = document.getElementById('collapsed-icon');
+    const widget = document.getElementById('auth-widget');
+
+    if (isCollapsed === 'true') {
+        expanded.style.display = 'none';
+        collapsed.classList.remove('hidden');
+        collapsed.classList.add('flex');
+    } else {
+        // Початкова поява віджета з затримкою
+        widget.style.opacity = '0';
+        widget.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            widget.style.opacity = '1';
+            widget.style.transform = 'translateY(0)';
+        }, 2000);
+    }
+});
+      
+//моб. меню
+      // Логіка мобільного меню
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const statusText = document.getElementById('menu-status-text');
+    const isHidden = menu.classList.contains('hidden-menu');
+
+    if (isHidden) {
+        menu.classList.remove('hidden-menu');
+        menu.classList.add('active-menu');
+        statusText.innerText = "ЗАКРИТИ";
+        statusText.style.color = "#FFFFFF";
+        document.body.style.overflow = 'hidden';
+    } else {
+        menu.classList.add('hidden-menu');
+        menu.classList.remove('active-menu');
+        statusText.innerText = "МЕНЮ";
+        statusText.style.color = window.scrollY > 80 ? "#0A2540" : "#FF6433";
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Оновлена логіка набару при скролі
+window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    const logoText = document.getElementById('logo-text');
+    const menuStatus = document.getElementById('menu-status-text');
+    const desktopLinks = document.querySelectorAll('#desktop-links a');
+
+    if (window.scrollY > 80) {
+        navbar.firstElementChild.classList.add('bg-white/95', 'backdrop-blur-2xl', 'shadow-premium', 'border-transparent');
+        navbar.firstElementChild.classList.remove('border-white/10');
+        
+        logoText.style.color = '#0A2540'; // Темний на білому фоні
+        if(menuStatus) menuStatus.style.color = '#0A2540';
+        
+        desktopLinks.forEach(link => {
+            link.style.color = 'rgba(10, 37, 64, 0.6)';
+        });
+    } else {
+        navbar.firstElementChild.classList.remove('bg-white/95', 'backdrop-blur-2xl', 'shadow-premium', 'border-transparent');
+        navbar.firstElementChild.classList.add('border-white/10');
+        
+        logoText.style.color = '#FFFFFF'; // Білий на темному фоні
+        if(menuStatus) menuStatus.style.color = '#FF6433';
+        
+        desktopLinks.forEach(link => {
+            link.style.color = 'rgba(255, 255, 255, 0.6)';
+        });
+    }
+});
+    </script>
+</body>
+</html>
